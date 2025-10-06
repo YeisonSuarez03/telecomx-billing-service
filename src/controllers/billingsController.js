@@ -17,7 +17,7 @@ export const createBilling = async (req, res) => {
 
   // ensure generationDate is set to now for new billings
   data.generationDate = new Date();
-  data.phoneNumber = user.phoneNumber;
+  data.phone = user.phone;
 
   const billing = new Billing(data);
   await billing.save();
@@ -56,7 +56,7 @@ export const getBilling = async (req, res) => {
         totalInvoice: billing?.totalInvoice,
         isPaid: billing?.isPaid,
         paymentDate: billing?.paymentDate,
-        phoneNumber: billing?.phoneNumber,
+        phone: billing?.phone,
       }, 
       user: {
         userId: user?.userId,
