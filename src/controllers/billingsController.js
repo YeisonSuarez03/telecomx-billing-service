@@ -59,6 +59,7 @@ export const getBilling = async (req, res) => {
       user: {
         userId: user?.userId,
         address: user?.address,
+        phoneNumber: user?.phoneNumber,
         isActive: user?.isActive,
       }});
   } catch (err) {
