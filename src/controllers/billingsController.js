@@ -17,6 +17,7 @@ export const createBilling = async (req, res) => {
 
   // ensure generationDate is set to now for new billings
   data.generationDate = new Date();
+  data.phoneNumber = user.phoneNumber;
 
   const billing = new Billing(data);
   await billing.save();
