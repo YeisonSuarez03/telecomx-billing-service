@@ -27,6 +27,7 @@ const processEvent = async (message) => {
       const userData = {
         userId: data?.userId,
         address: data?.address || {},
+        phoneNumber: data?.phoneNumber || {},
         isActive: data?.isActive ?? true
       };
 
@@ -54,6 +55,7 @@ const processEvent = async (message) => {
       // update user fields coming from event
       const update = {};
       if (data?.address) update.address = data?.address;
+      if (data?.phoneNumber) update.phoneNumber = data?.phoneNumber;
       if (typeof data?.isActive === 'boolean') update.isActive = data?.isActive;
       if (data?.email) update.email = data?.email;
 
