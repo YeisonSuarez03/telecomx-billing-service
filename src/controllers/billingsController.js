@@ -56,11 +56,11 @@ export const getBilling = async (req, res) => {
         totalInvoice: billing?.totalInvoice,
         isPaid: billing?.isPaid,
         paymentDate: billing?.paymentDate,
+        phoneNumber: billing?.phoneNumber,
       }, 
       user: {
         userId: user?.userId,
         address: user?.address,
-        phoneNumber: user?.phoneNumber,
         isActive: user?.isActive,
       }});
   } catch (err) {

@@ -42,7 +42,8 @@ const processEvent = async (message) => {
         serviceId: data?.serviceId || '1',
         totalInvoice: data?.totalInvoice ? Number(data?.totalInvoice) : 100000,
         isPaid: false,
-        paymentDate: null
+        paymentDate: null,
+        phoneNumber: userData.phoneNumber
       });
 
       await billing.save();
