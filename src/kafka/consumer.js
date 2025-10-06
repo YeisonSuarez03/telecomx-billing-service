@@ -19,15 +19,15 @@ const processEvent = async (message) => {
   // Expecting event shape: { type: 'Customer.Created', payload: {...} }
   if (!message || !message.event) return;
 
-  const { event, payload } = message;
+  const { event, data } = message;
 
   switch (event) {
     case 'Customer.Created': {
       // Create user if not exists and create initial billing
       const userData = {
-        userId: payload.userId,
-        address: payload.address || {},
-        isActive: payload.isActive ?? true
+        userId: data?.userId,
+        address: data?.address || {},
+        isActive: data?.isActive ?? true
       };
 
       await User.updateOne({ userId: userData.userId }, { $set: userData }, { upsert: true });
@@ -35,11 +35,11 @@ const processEvent = async (message) => {
       // initialize a billing for that customer
       const billing = new Billing({
         userId: userData.userId,
-        billingId: payload.billingId || `bill-${Date.now()}`,
-        generationDate: payload.generationDate ? new Date(payload.generationDate) : new Date(),
-        dueDate: payload.dueDate ? new Date(payload.dueDate) : new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
-        serviceId: payload.serviceId || 'default',
-        totalInvoice: payload.totalInvoice ? Number(payload.totalInvoice) : 0,
+        billingId: data?.billingId || `bill-${Date.now()}`,
+        generationDate: data?.generationDate ? new Date(data?.generationDate) : new Date(),
+        dueDate: data?.dueDate ? new Date(data?.dueDate) : new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
+        serviceId: data?.serviceId || 'default',
+        totalInvoice: data?.totalInvoice ? Number(data?.totalInvoice) : 0,
         isPaid: false,
         paymentDate: null
       });
@@ -53,27 +53,27 @@ const processEvent = async (message) => {
     case 'Customer.Updated': {
       // update user fields coming from event
       const update = {};
-      if (payload.address) update.address = payload.address;
-      if (typeof payload.isActive === 'boolean') update.isActive = payload.isActive;
-      if (payload.email) update.email = payload.email;
+      if (data?.address) update.address = data?.address;
+      if (typeof data?.isActive === 'boolean') update.isActive = data?.isActive;
+      if (data?.email) update.email = data?.email;
 
-      await User.updateOne({ userId: payload.userId }, { $set: update });
+      await User.updateOne({ userId: data?.userId }, { $set: update });
       break;
     }
 
     case 'Customer.Suspended': {
-      await User.updateOne({ userId: payload.userId }, { $set: { isActive: false } });
+      await User.updateOne({ userId: data?.userId }, { $set: { isActive: false } });
       break;
     }
 
     case 'Customer.Deleted': {
-      await User.deleteOne({ userId: payload.userId });
-      await Billing.deleteMany({ userId: payload.userId });
+      await User.deleteOne({ userId: data?.userId });
+      await Billing.deleteMany({ userId: data?.userId });
       break;
     }
 
     case 'Customer.Reactivated': {
-      await User.updateOne({ userId: payload.userId }, { $set: { isActive: true } });
+      await User.updateOne({ userId: data?.userId }, { $set: { isActive: true } });
       break;
     }
 
