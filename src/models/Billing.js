@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { PhoneSchema } from './User';
+import { PhoneSchema } from './User.js';
 
 const { Schema } = mongoose;
 
