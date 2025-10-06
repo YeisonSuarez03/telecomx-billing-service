@@ -15,6 +15,7 @@ const parseMessage = (message) => {
 };
 
 const processEvent = async (event) => {
+  console.log("CUSTOMER EVENT PROCESSED: ", {event});
   // Expecting event shape: { type: 'Customer.Created', payload: {...} }
   if (!event || !event.type) return;
 
