@@ -91,7 +91,7 @@ export const deleteBilling = async (req, res) => {
 export const getBillingsByUser = async (req, res) => {
   try {
     const { userId } = req.params;
-    const billings = await Billing.find({ userId }).lean();
+    const billings = await Billing.find({ userId }).sort({generationDate: -1});
     res.json(billings);
   } catch (err) {
     res.status(500).json({ error: err.message });
