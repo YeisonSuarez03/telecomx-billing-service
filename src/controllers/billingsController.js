@@ -46,7 +46,16 @@ export const getBilling = async (req, res) => {
       userId: billing.userId,
     });
     res.json({
-      billing, 
+      billing: {
+        userId: billing?.userId,
+        billingId: billing?.billingId,
+        generationDate: billing?.generationDate,
+        dueDate: billing?.dueDate,
+        serviceId: billing?.serviceId,
+        totalInvoice: billing?.totalInvoice,
+        isPaid: billing?.isPaid,
+        paymentDate: billing?.paymentDate,
+      }, 
       user: {
         userId: user?.userId,
         address: user?.address,
