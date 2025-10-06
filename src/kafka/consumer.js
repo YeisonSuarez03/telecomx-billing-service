@@ -38,7 +38,7 @@ const processEvent = async (message) => {
         billingId: data?.billingId || `bill-${Date.now()}`,
         generationDate: data?.generationDate ? new Date(data?.generationDate) : new Date(),
         dueDate: data?.dueDate ? new Date(data?.dueDate) : new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
-        serviceId: data?.serviceId || 'default',
+        serviceId: data?.serviceId || '1',
         totalInvoice: data?.totalInvoice ? Number(data?.totalInvoice) : 0,
         isPaid: false,
         paymentDate: null
