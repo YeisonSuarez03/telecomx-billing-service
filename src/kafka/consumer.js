@@ -39,7 +39,7 @@ const processEvent = async (message) => {
         generationDate: data?.generationDate ? new Date(data?.generationDate) : new Date(),
         dueDate: data?.dueDate ? new Date(data?.dueDate) : new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
         serviceId: data?.serviceId || '1',
-        totalInvoice: data?.totalInvoice ? Number(data?.totalInvoice) : 0,
+        totalInvoice: data?.totalInvoice ? Number(data?.totalInvoice) : 100000,
         isPaid: false,
         paymentDate: null
       });
