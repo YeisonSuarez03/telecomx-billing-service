@@ -42,8 +42,16 @@ export const getBilling = async (req, res) => {
     const billing = await Billing.findOne({ billingId: id });
     if (!billing) return res.status(404).json({ error: 'Billing not found' });
 
-    const user = await User.findOne({ userId: billing.userId });
-    res.json({billing, user});
+    const user = await User.findOne({ 
+      userId: billing.userId,
+    });
+    res.json({
+      billing, 
+      user: {
+        userId: user?.userId,
+        address: user?.address,
+        isActive: user?.isActive,
+      }});
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
