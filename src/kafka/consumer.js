@@ -21,7 +21,7 @@ const processEvent = async (message) => {
 
   const { event, payload } = message;
 
-  switch (type) {
+  switch (event) {
     case 'Customer.Created': {
       // Create user if not exists and create initial billing
       const userData = {
