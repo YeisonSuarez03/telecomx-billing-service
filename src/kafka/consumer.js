@@ -27,7 +27,7 @@ const processEvent = async (message) => {
       const userData = {
         userId: data?.userId,
         address: data?.address || {},
-        phoneNumber: data?.phoneNumber || {},
+        phone: data?.phone || {},
         isActive: data?.isActive ?? true
       };
 
@@ -43,7 +43,7 @@ const processEvent = async (message) => {
         totalInvoice: data?.totalInvoice ? Number(data?.totalInvoice) : 100000,
         isPaid: false,
         paymentDate: null,
-        phoneNumber: userData.phoneNumber
+        phone: userData.phone
       });
 
       await billing.save();
@@ -56,7 +56,7 @@ const processEvent = async (message) => {
       // update user fields coming from event
       const update = {};
       if (data?.address) update.address = data?.address;
-      if (data?.phoneNumber) update.phoneNumber = data?.phoneNumber;
+      if (data?.phone) update.phone = data?.phone;
       if (typeof data?.isActive === 'boolean') update.isActive = data?.isActive;
       if (data?.email) update.email = data?.email;
 

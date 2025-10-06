@@ -17,7 +17,7 @@ export const PhoneSchema = new Schema({
 const UserSchema = new Schema({
   userId: { type: String, required: true, unique: true },
   address: { type: AddressSchema },
-  phoneNumber: { type: PhoneSchema },
+  phone: { type: PhoneSchema },
   isActive: { type: Boolean, default: true }
 }, { timestamps: true });
 

@@ -12,7 +12,7 @@ const BillingSchema = new Schema({
   totalInvoice: { type: Number },
   isPaid: { type: Boolean, default: false },
   paymentDate: { type: Date, default: null },
-  phoneNumber: { type: PhoneSchema },
+  phone: { type: PhoneSchema },
 }, { timestamps: true });
 
 export default mongoose.model('Billing', BillingSchema);
