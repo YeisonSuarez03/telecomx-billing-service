@@ -9,7 +9,7 @@ const AddressSchema = new Schema({
   address: { type: String }
 }, { _id: false });
 
-const PhoneSchema = new Schema({
+export const PhoneSchema = new Schema({
   codeNumber: { type: String, default: '+57' },
   phoneNumber: { type: Number }
 }, { _id: false });
