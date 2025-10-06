@@ -15,11 +15,11 @@ const parseMessage = (message) => {
 };
 
 const processEvent = async (event) => {
-  console.log("CUSTOMER EVENT PROCESSED: ", {event});
+  console.log("CUSTOMER EVENT PROCESSED: ", {message});
   // Expecting event shape: { type: 'Customer.Created', payload: {...} }
-  if (!event || !event.type) return;
+  if (!message || !message.event) return;
 
-  const { type, payload } = event;
+  const { event, payload } = message;
 
   switch (type) {
     case 'Customer.Created': {
@@ -45,6 +45,8 @@ const processEvent = async (event) => {
       });
 
       await billing.save();
+
+      console.log("CUSTOMER CREATED");
       break;
     }
 
